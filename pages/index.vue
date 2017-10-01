@@ -1,7 +1,7 @@
 <template>
 <section class="container">
     <div>
-        <logo/>
+        <input class="Search-field" type="search" name="user" id="user">
         <h1 class="title">
             NUXT
         </h1>
@@ -22,10 +22,8 @@
 
 <script>
     /* eslint-disable no-underscore-dangle */
-    import Logo from '~/components/Logo.vue';
 
     export default {
-        components: { Logo },
         data() {
             return {
                 online: true,
