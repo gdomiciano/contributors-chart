@@ -1,7 +1,4 @@
 module.exports = {
-    /*
-    ** Build configuration
-    */
     build: {
         vendor: [ 'axios' ],
         extend(config, ctx) {
@@ -25,28 +22,22 @@ module.exports = {
                 loader: 'svg-sprite-loader',
             });
         },
+    },
+
+    head: {
+        title: 'Contriburtor\'s Chart',
 
     },
-    /*
-    ** Headers
-    ** Common headers are already provided by @nuxtjs/pwa preset
-    */
-    head: {
-        title: 'Contriburtors Chart'
-    },
-    /*
-    ** Customize the progress-bar color
-    */
-    loading: { color: '#3B8070' },
-    /*
-    ** Customize app manifest
-    */
+
+    loading: { color: '#F3AF92' },
+
     manifest: {
-        theme_color: '#44AFF4'
+        name: 'Contributor\'s Chart' ,
+        description: 'Check the contributions for each GitHub repo',
+        theme_color: '#44AFF4',
+        lang: 'en',
     },
-    /*
-    ** Modules
-    */
+
     modules: [
         '@nuxtjs/pwa',
         '@nuxtjs/axios',
