@@ -1,0 +1,32 @@
+{
+  "name": "contributors-chart",
+  "version": "1.0.0",
+  "description": "Responsive application, that user can search for a repository and see contributors per user in a chart.",
+  "author": "Geisy Domiciano <geisydomiciano@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@nuxtjs/axios": "^4.4.0",
+    "@nuxtjs/proxy": "^1.1.2",
+    "@nuxtjs/pwa": "^0.2.1",
+    "nuxt": "latest"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.2.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6"
+  }
+}
