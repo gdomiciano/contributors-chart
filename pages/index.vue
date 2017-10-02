@@ -1,7 +1,7 @@
 <template>
 <section class="container">
     <div>
-        <input class="Search-field" type="search" name="user" id="user">
+        <search/>
         <h1 class="title">
             NUXT
         </h1>
@@ -22,12 +22,16 @@
 
 <script>
     /* eslint-disable no-underscore-dangle */
+    import Search from '~/components/Search.vue';
 
     export default {
         data() {
             return {
                 online: true,
             };
+        },
+        components: {
+            Search,
         },
         mounted() {
             if (!window.navigator) {

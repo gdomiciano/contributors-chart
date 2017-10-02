@@ -1,0 +1,35 @@
+
+// Colors
+
+@function color ($color, $value: 500) {
+    @return map-get($color, $value);
+}
+
+// Basic
+
+$white: (
+    500: #fff
+);
+
+$black: (
+    500: #000
+);
+
+$grey: (
+    50: #F2F2F2,
+    200: #8C8C8C,
+    400: #3E3E3E,
+    600: #272727,
+    800: #0E0E0E
+);
+
+//theme colors
+$theme-blue: (
+    50: #61E1F5,
+    200: #44AFF4
+);
+
+$theme-red: (
+    50: #F3AF92,
+    800: #AF3C34
+);
