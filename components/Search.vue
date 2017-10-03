@@ -173,4 +173,10 @@
         }
     }
 
+    @media screen and (min-width: 1366px) {
+        .Search-typeahead{
+            width: 50%;
+        }
+    }
+
 </style>
