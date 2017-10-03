@@ -1,7 +1,8 @@
 <template>
     <div class="Search-typeahead">
+        <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
         <form class="Search-typeahead--form" v-on:submit.prevent>
-            <input class="Search-typeahead--field"  type="search" name="user" id="user" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
+            <input class="Search-typeahead--field"  type="search" name="user" id="user" placeholder="GitHub username" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
@@ -106,16 +107,70 @@
 <style scoped lang="scss">
     @import '~assets/scss/colors';
 
-    .Search-field {
-        width: 80%;
-        padding: 5px;
-        line-height: 30px;
-        border: color($grey, 200) 1px solid;
-        border-radius: 20px;
+    .Search-typeahead{
+        width: 90%;
+        margin: 0 auto;
+        padding-top: 20px;
+        position: relative;
+        text-align: center;
     }
 
-    .selected {
+    .Search-typeahead--intro {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .Search-typeahead--field {
+        width: 100%;
+        padding: 5px 15px;
+        line-height: 30px;
+        border: color($grey, 400) 1px solid;
+        border-radius: 20px;
+        display: block;
+        font-size: 18px;
+    }
+
+    .Search-typeahead--list {
+        position: absolute;
+        z-index: 2;
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: 200px;
+        border: 1px color($grey, 200) solid;
+        border-radius: 0 0 10px 10px ;
+        background-color: color($white);
+    }
+
+    .Search-typeahead--item {
+        padding: 15px;
+        border-bottom: 1px color($grey, 50) solid;
+    }
+
+    .selected,
+    .Search-typeahead--item:hover {
         background-color: color($theme-red, 50);
+    }
+
+
+    @media screen and (min-width: 768px) {
+        .Search-typeahead{
+            width: 70%;
+            padding-top:10%;
+        }
+
+        .Search-typeahead--intro {
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        .Search-typeahead{
+            width: 60%;
+            padding-top:5%;
+        }
     }
 
 </style>
