@@ -32,6 +32,7 @@ const store = () => new Vuex.Store({
         },
         SET_ERROR(state, model) {
             this.state.repoList = null;
+            this.state.chartInfo = null;
             this.state.error = model;
         },
     },

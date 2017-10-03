@@ -1,6 +1,6 @@
 <template>
     <div class="Chart">
-        <h2 class="Chart-title"> {{repo}}'s repository chart:</h2>
+        <h2 class="Chart-title"> {{repo}}'s chart:</h2>
         <bar-chart :chart-data="chartInfo"></bar-chart>
     </div>
 </template>
@@ -41,5 +41,10 @@
         width: 95%;
         max-height: 50%;
         margin: 0 auto;
+    }
+
+    .Chart-title{
+        font-size: 28px;
+        text-align: center;
     }
 </style>

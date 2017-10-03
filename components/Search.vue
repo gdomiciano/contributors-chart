@@ -109,10 +109,12 @@
 
     .Search-typeahead{
         width: 90%;
-        margin: 0 auto;
+        margin: 0 auto 20px;
         padding-top: 20px;
         position: relative;
         text-align: center;
+        padding-bottom: 20px;
+        border-bottom: color($theme-blue, 200) dotted 1px;
     }
 
     .Search-typeahead--intro {
@@ -128,6 +130,10 @@
         border-radius: 20px;
         display: block;
         font-size: 18px;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     .Search-typeahead--list {
