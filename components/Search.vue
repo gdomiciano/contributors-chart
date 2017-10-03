@@ -5,12 +5,15 @@
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @keyup.enter="selectItem" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp"> {{ repo.full_name }}</li>
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id"  @keyup.down="focusDown" @keyup.up="focusUp"> <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem" @click="selectItem"> {{ repo.full_name }} </a></li>
         </ul>
     </div>
 </template>
 
 <script>
+    let firstItem = null;
+    let input = null;
+
     export default {
         name: 'Search',
 
@@ -19,9 +22,6 @@
                 user: '',
                 delay: 500,
             };
-        },
-
-        beforeMount() {
         },
 
         computed: {
@@ -41,6 +41,7 @@
                     }, delay);
                 };
             },
+
             async getRepos() {
                 if (this.user) {
                     const user = this.user.split('/');
@@ -48,28 +49,36 @@
                 }
             },
 
-            focusDown(e) {
-                console.log(e);
-                const firstItem = document.querySelector('.Search-typeahead--item');
-                const input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement === input) {
-                    console.log(this.first);
+            focusDown() {
+                firstItem = document.querySelector('.Search-typeahead--item');
+                input = document.querySelector('.Search-typeahead--field');
+                if (document.activeElement == input) {
+                    firstItem.firstChild.focus();
                     firstItem.classList.add('selected');
-                } else {
-                    document.activeElement.parentNode.nextSibling.firstChild.classList.add('selected');
+                } else if (document.activeElement.parentNode.nextSibling){
+                    document.activeElement.parentNode.classList.remove('selected');
+                    document.activeElement.parentNode.nextSibling.firstChild.focus();
+                    document.activeElement.parentNode.classList.add('selected');
                 }
+                this.user = document.activeElement.innerText;
+
             },
 
             focusUp() {
-                // const firstItem = document.querySelector('.Search-typeahead--item');
-                const input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement === (input || this.first)) {
+                firstItem = document.querySelector('.Search-typeahead--item');
+                input = document.querySelector('.Search-typeahead--field');
+                console.log(firstItem)
+                if (firstItem.className.includes('selected')) {
+                    document.activeElement.parentNode.classList.remove('selected');
                     input.focus();
+                    this.user = this.user.split('/')[0] ;
                 } else {
+                    document.activeElement.parentNode.classList.remove('selected');
                     document.activeElement.parentNode.previousSibling.firstChild.focus();
+                    document.activeElement.parentNode.classList.add('selected');
+                    this.user = document.activeElement.innerText;
                 }
             },
-
 
             async selectItem(e) {
                 console.log(e);
@@ -77,7 +86,6 @@
                 this.user = repository;
                 await this.$store.dispatch('getChartInfo', repository);
             },
-
         },
 
         directives: {
