@@ -14,7 +14,7 @@ const store = () => new Vuex.Store({
         },
         GET_CHART_INFO(state, model) {
             this.state.repoList = null;
-
+            // generate data obj structure
             const info = {
                 labels: [],
                 datasets: [{
@@ -24,6 +24,7 @@ const store = () => new Vuex.Store({
                     barPercentage: 1.0,
                 }],
             };
+
             model.forEach((contrib) => {
                 info.labels.push(contrib.login);
                 info.datasets[0].data.push(contrib.contributions);
@@ -53,7 +54,6 @@ const store = () => new Vuex.Store({
         },
 
         async getChartInfo({ commit }, repo) {
-            // https://api.github.com/repos/angular/angular/contributors
             const data = await this.$axios.$get(`https://api.github.com/repos/${repo}/contributors`);
             if (data) {
                 commit('GET_CHART_INFO', data);
