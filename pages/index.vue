@@ -1,17 +1,9 @@
 <template>
 <section class="container">
     <div>
-        <search/>
-        <h1 class="title">
-            NUXT
-        </h1>
-        <h2 class="subtitle">
-            PWA Vue.js Application
-        </h2>
-        <div :class="['network',online ? 'online' : 'offline']">
-            <div class="circle"></div>
-            {{ online ? 'online' : 'offline' }}
-        </div>
+        <search />
+        <error v-if="message" :message="message" />
+        <chart />
         <div class="links">
             <a href="https://nuxtjs.org/" target="_blank" class="button--green" rel="noopener">Documentation</a>
             <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey" rel="noopener">GitHub</a>
@@ -23,6 +15,8 @@
 <script>
     /* eslint-disable no-underscore-dangle */
     import Search from '~/components/Search.vue';
+    import Error from '~/components/Error.vue'
+    import Chart from '~/components/Chart.vue'
 
     export default {
         data() {
@@ -30,26 +24,20 @@
                 online: true,
             };
         },
+
         components: {
             Search,
+            Error,
+            Chart,
         },
-        mounted() {
-            if (!window.navigator) {
-                this.online = false;
-                return;
-            }
-            this.online = Boolean(window.navigator.onLine);
-            window.addEventListener('offline', this._toggleNetworkStatus);
-            window.addEventListener('online', this._toggleNetworkStatus);
-        },
-        methods: {
-            _toggleNetworkStatus({ type }) {
-                this.online = type === 'online';
+
+        computed: {
+            message() {
+                return this.$store.state.error;
             },
         },
-        destroyed() {
-            window.removeEventListener('offline', this._toggleNetworkStatus);
-            window.removeEventListener('online', this._toggleNetworkStatus);
+
+        methods: {
         },
     };
 </script>

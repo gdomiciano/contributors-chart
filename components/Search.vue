@@ -1,10 +1,12 @@
 <template>
-    <div class="Search">
-        <input class="Search-field" v-model.lazy="user" v-delay="delay" @change="getRepos" type="search" name="user" id="user">
-        <ul v-if="repos && user">
-            <li v-if="repos" v-for="repo in repos" :key="repo.id">{{ repo.name }}</li>
-        </ul>
+    <div class="Search-typeahead">
+        <form class="Search-typeahead--form">
+            <input class="Search-typeahead--field" v-model.lazy="user" v-delay="delay" @change="getRepos" type="search" name="user" id="user">
+        </form>
 
+        <ul class="Search-typeahead--list" v-if="repos && user">
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id">{{ repo.full_name }}</li>
+        </ul>
     </div>
 </template>
 
@@ -21,7 +23,7 @@
         computed: {
             repos(){
                 return this.$store.state.repoList;
-            }
+            },
         },
 
         methods: {
