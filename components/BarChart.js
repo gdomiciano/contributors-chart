@@ -15,11 +15,12 @@ export default Bar.extend({
         this.renderChart(this.chartData, this.options);
     },
 
+    // reset default oprions so it is possible to resize the chart
     data() {
         return {
             defaultOptions: {
-                responsive: true, // my new default options
-                maintainAspectRatio: false, // my new default options
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -27,7 +28,7 @@ export default Bar.extend({
                         },
                         stacked: true,
                         gridLines: {
-                            display: true, // my new default options
+                            display: true,
                         },
                     }],
                     xAxes: [{

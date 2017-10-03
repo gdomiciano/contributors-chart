@@ -13,15 +13,31 @@ module.exports = {
                     },
                 });
             }
-
-            const urlLoader = config.module.rules.find(rule => rule.loader === 'url-loader');
-            urlLoader.test = /\.(png|jpe?g|gif)$/;
-
-            config.module.rules.push({
-                test: /\.svg$/,
-                loader: 'svg-sprite-loader',
-            });
         },
+        analyze: true,
+        extractCSS: true,
+    },
+    generate: {
+        minify: {
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true,
+            decodeEntities: true,
+            minifyCSS: true,
+            minifyJS: true,
+            processConditionalComments: true,
+            removeAttributeQuotes: false,
+            removeComments: false,
+            removeEmptyAttributes: true,
+            removeOptionalTags: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: false,
+            removeStyleLinkTypeAttributes: false,
+            removeTagWhitespace: false,
+            sortAttributes: true,
+            sortClassName: true,
+            trimCustomFragments: true,
+            useShortDoctype: true
+        }
     },
 
     head: {

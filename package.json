@@ -1,7 +1,7 @@
 {
   "name": "contributors-chart",
   "version": "1.0.0",
-  "description": "Responsive application, that user can search for a repository and see contributors per user in a chart.",
+  "description": "Responsive application, that user can search for a repository and see contributions per user in a chart.",
   "author": "Geisy Domiciano <geisydomiciano@gmail.com>",
   "private": true,
   "dependencies": {

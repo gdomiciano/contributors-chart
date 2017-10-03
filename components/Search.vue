@@ -6,7 +6,9 @@
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp"> <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a></li>
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp">
+                <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a>
+            </li>
         </ul>
     </div>
 </template>
@@ -32,6 +34,7 @@
         },
 
         methods: {
+            // run the delay for the directive
             debounce: (fn, delay) => {
                 let timeoutID = null;
                 return () => {
@@ -43,6 +46,7 @@
                 };
             },
 
+            // get repositories from user
             async getRepos() {
                 if (this.user) {
                     const user = this.user.split('/');
@@ -50,34 +54,40 @@
                 }
             },
 
+            // controls the arrow down key on typeahead suggestions
             focusDown() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement === input) {
+                const activeEl = document.activeElement;
+
+                if (activeEl === input) {
                     firstItem.firstChild.focus();
                     firstItem.classList.add('selected');
-                } else if (document.activeElement.parentNode.nextSibling) {
-                    document.activeElement.parentNode.classList.remove('selected');
-                    document.activeElement.parentNode.nextSibling.firstChild.focus();
-                    document.activeElement.parentNode.classList.add('selected');
+                } else if (activeEl.parentNode.nextSibling) {
+                    activeEl.parentNode.classList.remove('selected');
+                    activeEl.parentNode.nextSibling.firstChild.focus();
+                    activeEl.parentNode.classList.add('selected');
                 }
-                this.user = document.activeElement.innerText;
+                this.user = activeEl.innerText;
             },
 
+            // controls the arrow up key on typeahead suggestions
             focusUp() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
+                const activeEl = document.activeElement;
+
                 console.log(firstItem);
                 if (firstItem.className.includes('selected')) {
-                    document.activeElement.parentNode.classList.remove('selected');
+                    activeEl.parentNode.classList.remove('selected');
                     input.focus();
                     // eslint-disable-next-line
                     this.user = this.user.split('/')[0];
                 } else {
-                    document.activeElement.parentNode.classList.remove('selected');
-                    document.activeElement.parentNode.previousSibling.firstChild.focus();
-                    document.activeElement.parentNode.classList.add('selected');
-                    this.user = document.activeElement.innerText;
+                    activeEl.parentNode.classList.remove('selected');
+                    activeEl.parentNode.previousSibling.firstChild.focus();
+                    activeEl.parentNode.classList.add('selected');
+                    this.user = activeEl.innerText;
                 }
             },
 
@@ -89,6 +99,7 @@
         },
 
         directives: {
+            // this custom directive is used to wait 500ms after user's last key interaction and then it will call the github API
             delay: (el, binding) => {
                 const app = this.a;
                 if (binding.value !== binding.oldValue) { // change debounce only if interval has changed
