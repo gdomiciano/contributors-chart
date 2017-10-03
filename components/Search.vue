@@ -53,26 +53,26 @@
             focusDown() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement == input) {
+                if (document.activeElement === input) {
                     firstItem.firstChild.focus();
                     firstItem.classList.add('selected');
-                } else if (document.activeElement.parentNode.nextSibling){
+                } else if (document.activeElement.parentNode.nextSibling) {
                     document.activeElement.parentNode.classList.remove('selected');
                     document.activeElement.parentNode.nextSibling.firstChild.focus();
                     document.activeElement.parentNode.classList.add('selected');
                 }
                 this.user = document.activeElement.innerText;
-
             },
 
             focusUp() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
-                console.log(firstItem)
+                console.log(firstItem);
                 if (firstItem.className.includes('selected')) {
                     document.activeElement.parentNode.classList.remove('selected');
                     input.focus();
-                    this.user = this.user.split('/')[0] ;
+                    // eslint-disable-next-line
+                    this.user = this.user.split('/')[0];
                 } else {
                     document.activeElement.parentNode.classList.remove('selected');
                     document.activeElement.parentNode.previousSibling.firstChild.focus();
@@ -82,10 +82,9 @@
             },
 
             selectItem(e) {
-
                 const repository = e.target.innerText;
                 this.user = repository;
-                this.$emit('showChart', repository)
+                this.$emit('showChart', repository);
             },
         },
 

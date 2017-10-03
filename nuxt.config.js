@@ -2,17 +2,17 @@ module.exports = {
     build: {
         vendor: [ 'axios' ],
         extend(config, ctx) {
-            // if (ctx.isClient) {
-            //     config.module.rules.push({
-            //         enforce: 'pre',
-            //         test: /\.(js|vue)$/,
-            //         loader: 'eslint-loader',
-            //         exclude: /(node_modules)/,
-            //         options: {
-            //             fix: true,
-            //         },
-            //     });
-            // }
+            if (ctx.isClient) {
+                config.module.rules.push({
+                    enforce: 'pre',
+                    test: /\.(js|vue)$/,
+                    loader: 'eslint-loader',
+                    exclude: /(node_modules)/,
+                    options: {
+                        fix: true,
+                    },
+                });
+            }
 
             const urlLoader = config.module.rules.find(rule => rule.loader === 'url-loader');
             urlLoader.test = /\.(png|jpe?g|gif)$/;

@@ -40,7 +40,7 @@
             async getInfo(repository) {
                 await this.$store.dispatch('getChartInfo', repository);
                 this.repository = repository;
-            }
+            },
         },
     };
 </script>
