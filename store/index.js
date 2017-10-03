@@ -38,7 +38,8 @@ const store = () => new Vuex.Store({
 
         async getChartInfo({ commit }, params) {
             // https://api.github.com/repos/angular/angular/contributors
-            const data = await this.$axios.$get(`https://api.github.com/repos/${params.user}/${params.repo}/contributors`);
+            const data = await this.$axios.$get(`https://api.github.com/repos/angular/angular/contributors`);
+            // const data = await this.$axios.$get(`https://api.github.com/repos/${params.user}/${params.repo}/contributors`);
             if (data) {
                 commit('GET_CHART_INFO', data)
             } else {
