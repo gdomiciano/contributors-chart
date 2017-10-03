@@ -3,7 +3,7 @@
     <div>
         <search />
         <error v-if="message" :message="message" />
-        <chart />
+        <chart v-if="chartInfo" />
 
         <div class="links">
             <a href="https://nuxtjs.org/" target="_blank" class="button--green" rel="noopener">Documentation</a>
@@ -31,6 +31,9 @@
             message() {
                 return this.$store.state.error;
             },
+            chartInfo() {
+                return this.$store.state.chartInfo;
+            }
         },
 
         methods: {
@@ -39,4 +42,13 @@
 </script>
 
 <style>
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+    }
+    .container {
+        height: 100%;
+    }
 </style>

@@ -1,11 +1,11 @@
 <template>
     <div class="Search-typeahead">
-        <form class="Search-typeahead--form">
-            <input class="Search-typeahead--field" v-model.lazy="user" v-delay="delay" @change="getRepos" type="search" name="user" id="user">
+        <form class="Search-typeahead--form" v-on:submit.prevent>
+            <input class="Search-typeahead--field"  type="search" name="user" id="user" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusFirstItem" @focus="getRepos" autocomplete="off" />
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id">{{ repo.full_name }}</li>
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @keyup.enter="selectItem" @click="selectItem"> {{ repo.full_name }}</li>
         </ul>
     </div>
 </template>
@@ -38,8 +38,21 @@
                 };
             },
             async getRepos(){
-                await this.$store.dispatch('getRepoList', this.user);
+                if(this.user){
+                    await this.$store.dispatch('getRepoList', this.user);
+                }
+            },
+
+            focusFirstItem() {
+                document.querySelector('.Search-typeahead--item').classList.add('selected');
+            },
+
+            async selectItem(e){
+                console.log(e);
+                const repository = event.target.innerText;
+                await this.$store.dispatch('getChartInfo', repository);
             }
+
         },
 
         directives: {
@@ -63,6 +76,10 @@
         line-height: 30px;
         border: color($grey, 200) 1px solid;
         border-radius: 20px;
+    }
+
+    .selected {
+        background-color: color($theme-red, 50);
     }
 
 </style>

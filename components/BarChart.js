@@ -1,28 +1,43 @@
-// CommitChart.js
-
-import { Bar, mixins } from 'vue-chartjs'
+import { Bar, mixins } from 'vue-chartjs';
 const { reactiveProp } = mixins
 
 export default Bar.extend({
-  mixins: [reactiveProp],
-  props: ['options'],
-  mounted () {
+    mixins: [reactiveProp],
+    props: {
+        options: {
+            type: Object,
+        }
+    },
+
+    mounted () {
     // this.chartData is created in the mixin
-    // this.renderChart(this.chartData, this.options)
-    this.renderChart(this.chartData, this.options)
-  }
+    this.renderChart(this.chartData, this.options);
+    },
+
+    data() {
+        return {
+            defaultOptions: {
+                responsive: true, // my new default options
+                maintainAspectRatio: false, // my new default options
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        stacked: true,
+                        gridLines: {
+                            display: true, // my new default options
+                        },
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                        },
+                    }],
+                }
+            },
+            plugins: []
+        }
+    },
 });
-
-
-
-// import { Line, mixins } from 'vue-chartjs'
-// const { reactiveProp } = mixins
-
-// export default Line.extend({
-//   mixins: [reactiveProp],
-//   props: ['options'],
-//   mounted () {
-//     // this.chartData is created in the mixin
-//     this.renderChart(this.chartData, this.options)
-//   }
-// })
