@@ -5,7 +5,7 @@
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id"  @keyup.down="focusDown" @keyup.up="focusUp"> <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem" @click="selectItem"> {{ repo.full_name }} </a></li>
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp"> <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a></li>
         </ul>
     </div>
 </template>
@@ -80,11 +80,11 @@
                 }
             },
 
-            async selectItem(e) {
-                console.log(e);
+            selectItem(e) {
+
                 const repository = e.target.innerText;
                 this.user = repository;
-                await this.$store.dispatch('getChartInfo', repository);
+                this.$emit('showChart', repository)
             },
         },
 

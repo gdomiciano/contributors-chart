@@ -1,9 +1,9 @@
 <template>
     <section class="container">
         <div>
-            <search />
+            <search @showChart="getInfo" />
             <error v-if="message" :message="message" />
-            <chart v-if="chartInfo" />
+            <chart v-if="chartInfo" :repo="repository"/>
         </div>
     </section>
 </template>
@@ -14,6 +14,12 @@
     import Chart from '~/components/Chart.vue';
 
     export default {
+
+        data() {
+            return {
+                repository: null,
+            };
+        },
 
         components: {
             Search,
@@ -31,6 +37,10 @@
         },
 
         methods: {
+            async getInfo(repository) {
+                await this.$store.dispatch('getChartInfo', repository);
+                this.repository = repository;
+            }
         },
     };
 </script>

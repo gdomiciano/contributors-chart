@@ -1,5 +1,6 @@
 <template>
     <div class="Chart">
+        <h2 class="Chart-title"> {{repo}}'s repository chart:</h2>
         <bar-chart :chart-data="chartInfo"></bar-chart>
     </div>
 </template>
@@ -9,6 +10,14 @@
 
     export default {
         name: 'Chart',
+
+        props: {
+            repo: {
+                type: String,
+                required: true,
+            },
+        },
+
         components: {
             BarChart,
         },
