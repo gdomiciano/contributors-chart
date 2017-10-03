@@ -1,11 +1,11 @@
 <template>
     <div class="Search-typeahead">
         <form class="Search-typeahead--form" v-on:submit.prevent>
-            <input class="Search-typeahead--field"  type="search" name="user" id="user" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusFirstItem" @focus="getRepos" autocomplete="off" />
+            <input class="Search-typeahead--field"  type="search" name="user" id="user" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @keyup.enter="selectItem" @click="selectItem"> {{ repo.full_name }}</li>
+            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @keyup.enter="selectItem" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp"> {{ repo.full_name }}</li>
         </ul>
     </div>
 </template>
@@ -20,6 +20,10 @@
                 delay: 500,
             };
         },
+
+        beforeMount(){
+        },
+
         computed: {
             repos(){
                 return this.$store.state.repoList;
@@ -37,19 +41,36 @@
                     }, delay);
                 };
             },
-            async getRepos(){
+            async getRepos() {
                 if(this.user){
-                    await this.$store.dispatch('getRepoList', this.user);
+                    const user = this.user.split('/')
+                    await this.$store.dispatch('getRepoList', user[0]);
                 }
             },
 
-            focusFirstItem() {
-                document.querySelector('.Search-typeahead--item').classList.add('selected');
+            focusDown(e) {
+                console.log(e);
+                const firstItem = document.querySelector('.Search-typeahead--item');
+                const input = document.querySelector('.Search-typeahead--field');
+                if (document.activeElement == input) {
+                    console.log(this.first);
+                    firstItem.classList.add('selected');
+                } else {
+                    document.activeElement.parentNode.nextSibling.firstChild.classList.add('selected');
+                }
+            },
+
+            focusUp() {
+                const firstItem = document.querySelector('.Search-typeahead--item');
+                const input = document.querySelector('.Search-typeahead--field');
+                if (document.activeElement == (input || this.first)) {input.focus()}// stop the script if the focus is on the input or first element
+                else { document.activeElement.parentNode.previousSibling.firstChild.focus(); }
             },
 
             async selectItem(e){
                 console.log(e);
                 const repository = event.target.innerText;
+                this.user = repository;
                 await this.$store.dispatch('getChartInfo', repository);
             }
 
@@ -70,6 +91,7 @@
 
 <style scoped lang="scss">
     @import '~assets/scss/colors';
+
     .Search-field {
         width: 80%;
         padding: 5px;
