@@ -21,29 +21,29 @@
             };
         },
 
-        beforeMount(){
+        beforeMount() {
         },
 
         computed: {
-            repos(){
+            repos() {
                 return this.$store.state.repoList;
             },
         },
 
         methods: {
             debounce: (fn, delay) => {
-                let timeoutID = null
-                return function () {
-                    clearTimeout(timeoutID)
+                let timeoutID = null;
+                return () => {
+                    clearTimeout(timeoutID);
                     const args = arguments;
-                    timeoutID = setTimeout(function () {
+                    timeoutID = setTimeout(() => {
                         fn.apply(this, args);
                     }, delay);
                 };
             },
             async getRepos() {
-                if(this.user){
-                    const user = this.user.split('/')
+                if (this.user) {
+                    const user = this.user.split('/');
                     await this.$store.dispatch('getRepoList', user[0]);
                 }
             },
@@ -52,7 +52,7 @@
                 console.log(e);
                 const firstItem = document.querySelector('.Search-typeahead--item');
                 const input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement == input) {
+                if (document.activeElement === input) {
                     console.log(this.first);
                     firstItem.classList.add('selected');
                 } else {
@@ -61,18 +61,22 @@
             },
 
             focusUp() {
-                const firstItem = document.querySelector('.Search-typeahead--item');
+                // const firstItem = document.querySelector('.Search-typeahead--item');
                 const input = document.querySelector('.Search-typeahead--field');
-                if (document.activeElement == (input || this.first)) {input.focus()}// stop the script if the focus is on the input or first element
-                else { document.activeElement.parentNode.previousSibling.firstChild.focus(); }
+                if (document.activeElement === (input || this.first)) {
+                    input.focus();
+                } else {
+                    document.activeElement.parentNode.previousSibling.firstChild.focus();
+                }
             },
 
-            async selectItem(e){
+
+            async selectItem(e) {
                 console.log(e);
-                const repository = event.target.innerText;
+                const repository = e.target.innerText;
                 this.user = repository;
                 await this.$store.dispatch('getChartInfo', repository);
-            }
+            },
 
         },
 
@@ -80,9 +84,11 @@
             delay: (el, binding) => {
                 const app = this.a;
                 if (binding.value !== binding.oldValue) { // change debounce only if interval has changed
-                    el.oninput = app.methods.debounce(function (evt) {
+                    /* eslint-disable */
+                    el.oninput = app.methods.debounce(() => {
                         el.dispatchEvent(new Event('change'));
-                    }, parseInt(binding.value) || 500)
+                    }, parseInt(binding.value) || 500);
+                    /* eslint-enable */
                 }
             },
         },

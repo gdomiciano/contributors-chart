@@ -21,9 +21,9 @@ const store = () => new Vuex.Store({
                     label: 'User Contributions',
                     backgroundColor: '#AF3C34',
                     data: [],
-                    barPercentage: 1.0
-                }]
-            }
+                    barPercentage: 1.0,
+                }],
+            };
             model.forEach((contrib) => {
                 info.labels.push(contrib.login);
                 info.datasets[0].data.push(contrib.contributions);
@@ -31,7 +31,7 @@ const store = () => new Vuex.Store({
             this.state.chartInfo = info;
         },
         SET_ERROR(state, model) {
-            this.state.repoList = null
+            this.state.repoList = null;
             this.state.error = model;
         },
     },
@@ -55,9 +55,9 @@ const store = () => new Vuex.Store({
             // https://api.github.com/repos/angular/angular/contributors
             const data = await this.$axios.$get(`https://api.github.com/repos/${repo}/contributors`);
             if (data) {
-                commit('GET_CHART_INFO', data)
+                commit('GET_CHART_INFO', data);
             } else {
-                console.log('chart', data)
+                console.log('chart', data);
             }
         },
     },

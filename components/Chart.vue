@@ -5,15 +5,16 @@
 </template>
 
 <script>
-    import BarChart from './BarChart.js'
+    import BarChart from './BarChart.js';
+
     export default {
         name: 'Chart',
         components: {
-            BarChart
+            BarChart,
         },
 
         beforeMount() {
-            this.visibleArea = window.innerHeight/2;
+            this.visibleArea = window.innerHeight / 2;
         },
 
         computed: {
@@ -21,7 +22,7 @@
                 return this.$store.state.chartInfo;
             },
         },
-    }
+    };
 
 </script>
 

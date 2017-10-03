@@ -1,17 +1,18 @@
 import { Bar, mixins } from 'vue-chartjs';
-const { reactiveProp } = mixins
+
+const { reactiveProp } = mixins;
 
 export default Bar.extend({
     mixins: [reactiveProp],
     props: {
         options: {
             type: Object,
-        }
+        },
     },
 
-    mounted () {
+    mounted() {
     // this.chartData is created in the mixin
-    this.renderChart(this.chartData, this.options);
+        this.renderChart(this.chartData, this.options);
     },
 
     data() {
@@ -22,7 +23,7 @@ export default Bar.extend({
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
                         },
                         stacked: true,
                         gridLines: {
@@ -35,9 +36,9 @@ export default Bar.extend({
                             display: false,
                         },
                     }],
-                }
+                },
             },
-            plugins: []
-        }
+            plugins: [],
+        };
     },
 });

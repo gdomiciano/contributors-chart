@@ -16,8 +16,8 @@
 <script>
     /* eslint-disable no-underscore-dangle */
     import Search from '~/components/Search.vue';
-    import Error from '~/components/Error.vue'
-    import Chart from '~/components/Chart.vue'
+    import Error from '~/components/Error.vue';
+    import Chart from '~/components/Chart.vue';
 
     export default {
 
@@ -33,7 +33,7 @@
             },
             chartInfo() {
                 return this.$store.state.chartInfo;
-            }
+            },
         },
 
         methods: {
