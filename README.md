@@ -38,7 +38,7 @@ I have chosen to build this application based on [Nuxt.js PWA version](https://g
 
 Beyond the PWA feature, I have started this development with Nuxt.js to cover the SSR (Server Side Rendering), which means the page will be availabe for SEO ad still being a SPA, and this part is covered by Vue.js framework.
 
-**Responsivinesses:**
+**Responsive:**
 This application was developed with mobile first.
 
 **Typeahead:**
