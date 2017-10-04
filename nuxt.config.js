@@ -42,7 +42,6 @@ module.exports = {
 
     head: {
         title: 'Contriburtor\'s Chart',
-
     },
 
     loading: { color: '#F3AF92' },
@@ -50,8 +49,7 @@ module.exports = {
     manifest: {
         name: 'Contributor\'s Chart' ,
         description: 'Check the contributions for each GitHub repo',
-        theme_color: '#44AFF4',
-        lang: 'en',
+        theme_color: '#272727',
     },
 
     modules: [

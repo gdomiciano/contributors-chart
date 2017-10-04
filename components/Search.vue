@@ -58,36 +58,34 @@
             focusDown() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
-                const activeEl = document.activeElement;
 
-                if (activeEl === input) {
+                if (document.activeElement === input) {
                     firstItem.firstChild.focus();
                     firstItem.classList.add('selected');
-                } else if (activeEl.parentNode.nextSibling) {
-                    activeEl.parentNode.classList.remove('selected');
-                    activeEl.parentNode.nextSibling.firstChild.focus();
-                    activeEl.parentNode.classList.add('selected');
+                } else if (document.activeElement.parentNode.nextSibling) {
+                    document.activeElement.parentNode.classList.remove('selected');
+                    document.activeElement.parentNode.nextSibling.firstChild.focus();
+                    document.activeElement.parentNode.classList.add('selected');
                 }
-                this.user = activeEl.innerText;
+                this.user = document.activeElement.innerText;
             },
 
             // controls the arrow up key on typeahead suggestions
             focusUp() {
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
-                const activeEl = document.activeElement;
 
                 console.log(firstItem);
                 if (firstItem.className.includes('selected')) {
-                    activeEl.parentNode.classList.remove('selected');
+                    document.activeElement.parentNode.classList.remove('selected');
                     input.focus();
                     // eslint-disable-next-line
                     this.user = this.user.split('/')[0];
                 } else {
-                    activeEl.parentNode.classList.remove('selected');
-                    activeEl.parentNode.previousSibling.firstChild.focus();
-                    activeEl.parentNode.classList.add('selected');
-                    this.user = activeEl.innerText;
+                    document.activeElement.parentNode.classList.remove('selected');
+                    document.activeElement.parentNode.previousSibling.firstChild.focus();
+                    document.activeElement.parentNode.classList.add('selected');
+                    this.user = document.activeElement.innerText;
                 }
             },
 
@@ -168,6 +166,7 @@
     .selected,
     .Search-typeahead--item:hover {
         background-color: color($theme-red, 50);
+        cursor: pointer;
     }
 
 

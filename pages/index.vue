@@ -39,7 +39,8 @@
         methods: {
             async getInfo(repository) {
                 await this.$store.dispatch('getChartInfo', repository);
-                this.repository = repository;
+                // eslint-disable-next-line
+                this.repository = repository.split('/')[1];
             },
         },
     };

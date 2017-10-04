@@ -40,7 +40,7 @@
     .Chart {
         width: 95%;
         max-height: 50%;
-        margin: 0 auto;
+        margin: 0 auto 40px;
     }
 
     .Chart-title{
