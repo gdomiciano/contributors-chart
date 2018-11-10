@@ -1,4 +1,11 @@
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+    router: {
+        base: '/<repository-name>/'
+    }
+} : {}
+
 module.exports = {
+    ...routerBase,
     build: {
         extend(config, ctx) {
             if (ctx.isClient) {
