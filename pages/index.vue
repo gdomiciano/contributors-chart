@@ -3,7 +3,7 @@
         <div>
             <search @showChart="getInfo" />
             <error v-if="message" :message="message" />
-            <chart v-if="chartInfo" :repo="repository"/>
+            <chart v-if="chartInfo" />
         </div>
     </section>
 </template>
@@ -42,8 +42,6 @@
 
             async getInfo(repository) {
                 await this.getChartInfo(repository.trim());
-                // eslint-disable-next-line
-                this.repository = repository.split('/')[1];
             },
         },
     };

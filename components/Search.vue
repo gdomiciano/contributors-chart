@@ -43,7 +43,7 @@
         data() {
             return {
                 user: '',
-                delay: 500,
+                delay: 300,
                 timeoutI: null
             };
         },
@@ -71,7 +71,7 @@
             getRepos() {
                 if (this.user) {
                     const user = this.user.split('/');
-                    this.getRepoList(user[0]);
+                    this.getRepoList(user[0].trim());
                 }
             },
 
@@ -96,7 +96,6 @@
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
 
-                console.log(firstItem);
                 if (firstItem.className.includes('selected')) {
                     document.activeElement.parentNode.classList.remove('selected');
                     input.focus();
@@ -111,7 +110,7 @@
             },
 
             selectItem(e) {
-                const repository = e.target.innerText;
+                const repository = e.target.innerText.trim();
                 this.user = repository;
                 this.$emit('showChart', repository);
             },

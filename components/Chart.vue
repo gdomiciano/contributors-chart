@@ -1,6 +1,6 @@
 <template>
     <div class="Chart">
-        <h2 class="Chart-title"> {{repo}}'s chart:</h2>
+        <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
         <bar-chart :chart-data="chartInfo"></bar-chart>
     </div>
 </template>
@@ -12,20 +12,14 @@
     export default {
         name: 'Chart',
 
-        props: {
-            repo: {
-                type: String,
-                required: true,
-            },
-        },
-
         components: {
             BarChart,
         },
 
         computed: {
             ...mapGetters ([
-                'chartInfo'
+                'chartInfo',
+                'repositoryName'
             ]),
         },
 
