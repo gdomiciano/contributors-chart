@@ -1,12 +1,30 @@
 <template>
     <div class="Search-typeahead">
         <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
-        <form class="Search-typeahead--form" v-on:submit.prevent>
-            <input class="Search-typeahead--field"  type="search" name="user" id="user" placeholder="GitHub username" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
+        <form
+            class="Search-typeahead--form"
+            v-on:submit.prevent>
+            <input
+            class="Search-typeahead--field"
+            ref="search" type="search"
+            name="user"
+            id="user"
+            placeholder="GitHub username"
+            v-model.lazy="user"
+            @input="applyDelay"
+            @keyup.down="focusDown"
+            @focus="getRepos"
+            autocomplete="off" />
         </form>
 
-        <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp">
+        <ul class="Search-typeahead--list" v-if="repoList && user">
+            <li
+                class="Search-typeahead--item"
+                v-for="repo in repoList"
+                :key="repo.id"
+                @click="selectItem"
+                @keyup.down="focusDown"
+                @keyup.up="focusUp">
                 <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a>
             </li>
         </ul>
@@ -14,6 +32,8 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+
     let firstItem = null;
     let input = null;
 
@@ -23,34 +43,35 @@
         data() {
             return {
                 user: '',
-                delay: 500,
+                delay: 300,
+                timeoutI: null
             };
         },
 
         computed: {
-            repos() {
-                return this.$store.state.repoList;
-            },
+            ...mapGetters ([
+                'repoList'
+            ])
         },
 
         methods: {
-            // run the delay for the directive
-            debounce: (fn, delay) => {
-                let timeoutID = null;
-                return () => {
-                    clearTimeout(timeoutID);
-                    const args = arguments;
-                    timeoutID = setTimeout(() => {
-                        fn.apply(this, args);
-                    }, delay);
-                };
+            ...mapActions([
+                'getRepoList'
+            ]),
+
+             applyDelay () {
+                this.user = this.$refs.search.value
+                clearTimeout(this.timeoutID);
+                this.timeoutID = setTimeout(() => {
+                    if(this.user) this.getRepos();
+                }, this.delay);
             },
 
             // get repositories from user
-            async getRepos() {
+            getRepos() {
                 if (this.user) {
                     const user = this.user.split('/');
-                    await this.$store.dispatch('getRepoList', user[0]);
+                    this.getRepoList(user[0].trim());
                 }
             },
 
@@ -75,7 +96,6 @@
                 firstItem = document.querySelector('.Search-typeahead--item');
                 input = document.querySelector('.Search-typeahead--field');
 
-                console.log(firstItem);
                 if (firstItem.className.includes('selected')) {
                     document.activeElement.parentNode.classList.remove('selected');
                     input.focus();
@@ -90,23 +110,9 @@
             },
 
             selectItem(e) {
-                const repository = e.target.innerText;
+                const repository = e.target.innerText.trim();
                 this.user = repository;
                 this.$emit('showChart', repository);
-            },
-        },
-
-        directives: {
-            // this custom directive is used to wait 500ms after user's last key interaction and then it will call the github API
-            delay: (el, binding) => {
-                const app = this.a;
-                if (binding.value !== binding.oldValue) { // change debounce only if interval has changed
-                    /* eslint-disable */
-                    el.oninput = app.methods.debounce(() => {
-                        el.dispatchEvent(new Event('change'));
-                    }, parseInt(binding.value) || 500);
-                    /* eslint-enable */
-                }
             },
         },
     };

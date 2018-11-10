@@ -1,35 +1,30 @@
 <template>
     <div class="Chart">
-        <h2 class="Chart-title"> {{repo}}'s chart:</h2>
+        <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
         <bar-chart :chart-data="chartInfo"></bar-chart>
     </div>
 </template>
 
 <script>
-    import BarChart from './BarChart.js';
+    import BarChart from '@/components/BarChart';
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Chart',
-
-        props: {
-            repo: {
-                type: String,
-                required: true,
-            },
-        },
 
         components: {
             BarChart,
         },
 
-        beforeMount() {
-            this.visibleArea = window.innerHeight / 2;
+        computed: {
+            ...mapGetters ([
+                'chartInfo',
+                'repositoryName'
+            ]),
         },
 
-        computed: {
-            chartInfo() {
-                return this.$store.state.chartInfo;
-            },
+        beforeMount() {
+            this.visibleArea = window.innerHeight / 2;
         },
     };
 

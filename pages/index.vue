@@ -3,15 +3,16 @@
         <div>
             <search @showChart="getInfo" />
             <error v-if="message" :message="message" />
-            <chart v-if="chartInfo" :repo="repository"/>
+            <chart v-if="chartInfo" />
         </div>
     </section>
 </template>
 
 <script>
-    import Search from '~/components/Search.vue';
-    import Error from '~/components/Error.vue';
-    import Chart from '~/components/Chart.vue';
+    import Search from '@/components/Search.vue';
+    import Error from '@/components/Error';
+    import Chart from '@/components/Chart';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
 
@@ -28,19 +29,19 @@
         },
 
         computed: {
-            message() {
-                return this.$store.state.error;
-            },
-            chartInfo() {
-                return this.$store.state.chartInfo;
-            },
+            ...mapGetters([
+                'message',
+                'chartInfo',
+            ]),
         },
 
         methods: {
+            ...mapActions([
+                'getChartInfo',
+            ]),
+
             async getInfo(repository) {
-                await this.$store.dispatch('getChartInfo', repository);
-                // eslint-disable-next-line
-                this.repository = repository.split('/')[1];
+                await this.getChartInfo(repository.trim());
             },
         },
     };
