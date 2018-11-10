@@ -2,18 +2,24 @@ export const state = () => ({
     repoList: null,
     chartInfo: null,
     error: null,
+    repoName: ''
 });
 
 export const getters = {
     repoList: (state) => state.repoList,
     chartInfo: (state) => state.chartInfo,
     message: (state) => state.error,
+    repositoryName: (state) => state.repoName,
 };
 
 export const mutations = {
     SET_REPO_LIST(state, model) {
         state.error = null;
         state.repoList = model;
+    },
+
+    SET_REPO_NAME (state, name) {
+        state.repoName = name.split('/')[1]
     },
 
     SET_CHART_INFO(state, model) {
@@ -62,6 +68,7 @@ export const actions = {
         this.$axios.setHeader('Accept', 'application/vnd.github.v3+json');
         const data = await this.$axios.$get(`https://api.github.com/repos/${repo}/contributors`);
         if (data) {
+            commit('SET_REPO_NAME', repo);
             commit('SET_CHART_INFO', data);
         } else {
             console.log('chart', data);
