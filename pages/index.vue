@@ -12,6 +12,7 @@
     import Search from '@/components/Search.vue';
     import Error from '@/components/Error';
     import Chart from '@/components/Chart';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
 
@@ -28,18 +29,19 @@
         },
 
         computed: {
-            message() {
-                return this.$store.state.error;
-            },
-            chartInfo() {
-                return this.$store.state.chartInfo;
-            },
+            ...mapGetters([
+                'message',
+                'chartInfo',
+            ]),
         },
 
         methods: {
+            ...mapActions([
+                'getChartInfo',
+            ]),
+
             async getInfo(repository) {
-                console.log('REPOSITORY', repository)
-                await this.$store.dispatch('getChartInfo', repository.trim());
+                await this.getChartInfo(repository.trim());
                 // eslint-disable-next-line
                 this.repository = repository.split('/')[1];
             },

@@ -7,7 +7,7 @@ export const state = () => ({
 export const getters = {
     repoList: (state) => state.repoList,
     chartInfo: (state) => state.chartInfo,
-    error: (state) => state.error,
+    message: (state) => state.error,
 };
 
 export const mutations = {
@@ -15,6 +15,7 @@ export const mutations = {
         state.error = null;
         state.repoList = model;
     },
+
     SET_CHART_INFO(state, model) {
         state.repoList = null;
         // generate data obj structure
@@ -34,6 +35,7 @@ export const mutations = {
         });
         state.chartInfo = info;
     },
+
     SET_ERROR(state, model) {
         state.repoList = null;
         state.chartInfo = null;
@@ -57,6 +59,7 @@ export const actions = {
     },
 
     async getChartInfo({ commit }, repo) {
+        this.$axios.setHeader('Accept', 'application/vnd.github.v3+json');
         const data = await this.$axios.$get(`https://api.github.com/repos/${repo}/contributors`);
         if (data) {
             commit('SET_CHART_INFO', data);

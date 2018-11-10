@@ -4,7 +4,6 @@
         <form
             class="Search-typeahead--form"
             v-on:submit.prevent>
-            {{ user }}
             <input
             class="Search-typeahead--field"
             ref="search" type="search"
@@ -18,8 +17,14 @@
             autocomplete="off" />
         </form>
 
-        <ul class="Search-typeahead--list" v-if="repos && user">
-            <li class="Search-typeahead--item" v-for="repo in repos" :key="repo.id" @click="selectItem" @keyup.down="focusDown" @keyup.up="focusUp">
+        <ul class="Search-typeahead--list" v-if="repoList && user">
+            <li
+                class="Search-typeahead--item"
+                v-for="repo in repoList"
+                :key="repo.id"
+                @click="selectItem"
+                @keyup.down="focusDown"
+                @keyup.up="focusUp">
                 <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a>
             </li>
         </ul>
@@ -27,6 +32,8 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+
     let firstItem = null;
     let input = null;
 
@@ -42,12 +49,16 @@
         },
 
         computed: {
-            repos() {
-                return this.$store.state.repoList;
-            },
+            ...mapGetters ([
+                'repoList'
+            ])
         },
 
         methods: {
+            ...mapActions([
+                'getRepoList'
+            ]),
+
              applyDelay () {
                 this.user = this.$refs.search.value
                 clearTimeout(this.timeoutID);
@@ -57,10 +68,10 @@
             },
 
             // get repositories from user
-            async getRepos() {
+            getRepos() {
                 if (this.user) {
                     const user = this.user.split('/');
-                    await this.$store.dispatch('getRepoList', user[0]);
+                    this.getRepoList(user[0]);
                 }
             },
 

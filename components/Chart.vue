@@ -7,6 +7,7 @@
 
 <script>
     import BarChart from '@/components/BarChart';
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Chart',
@@ -22,14 +23,14 @@
             BarChart,
         },
 
-        beforeMount() {
-            this.visibleArea = window.innerHeight / 2;
+        computed: {
+            ...mapGetters ([
+                'chartInfo'
+            ]),
         },
 
-        computed: {
-            chartInfo() {
-                return this.$store.state.chartInfo;
-            },
+        beforeMount() {
+            this.visibleArea = window.innerHeight / 2;
         },
     };
 
