@@ -1,9 +1,21 @@
 <template>
     <div class="Search-typeahead">
         <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
-        <form class="Search-typeahead--form" v-on:submit.prevent>
+        <form
+            class="Search-typeahead--form"
+            v-on:submit.prevent>
             {{ user }}
-            <input class="Search-typeahead--field"  ref="search" type="search" name="user" id="user" placeholder="GitHub username" v-model.lazy="user"  @input="applyDelay" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
+            <input
+            class="Search-typeahead--field"
+            ref="search" type="search"
+            name="user"
+            id="user"
+            placeholder="GitHub username"
+            v-model.lazy="user"
+            @input="applyDelay"
+            @keyup.down="focusDown"
+            @focus="getRepos"
+            autocomplete="off" />
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
@@ -46,9 +58,7 @@
 
             // get repositories from user
             async getRepos() {
-                console.log('apply get repos to', this.user);
                 if (this.user) {
-                    console.log('actual call')
                     const user = this.user.split('/');
                     await this.$store.dispatch('getRepoList', user[0]);
                 }

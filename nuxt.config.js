@@ -1,6 +1,5 @@
 module.exports = {
     build: {
-        vendor: [ 'axios' ],
         extend(config, ctx) {
             if (ctx.isClient) {
                 config.module.rules.push({

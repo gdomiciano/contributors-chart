@@ -9,9 +9,9 @@
 </template>
 
 <script>
-    import Search from '~/components/Search.vue';
-    import Error from '~/components/Error.vue';
-    import Chart from '~/components/Chart.vue';
+    import Search from '@/components/Search.vue';
+    import Error from '@/components/Error';
+    import Chart from '@/components/Chart';
 
     export default {
 
@@ -38,7 +38,8 @@
 
         methods: {
             async getInfo(repository) {
-                await this.$store.dispatch('getChartInfo', repository);
+                console.log('REPOSITORY', repository)
+                await this.$store.dispatch('getChartInfo', repository.trim());
                 // eslint-disable-next-line
                 this.repository = repository.split('/')[1];
             },

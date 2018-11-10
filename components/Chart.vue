@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import BarChart from './BarChart.js';
+    import BarChart from '@/components/BarChart';
 
     export default {
         name: 'Chart',
