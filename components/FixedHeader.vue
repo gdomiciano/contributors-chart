@@ -4,7 +4,7 @@
         <h1 class="Header-brand--title">
             Contributor's
         </h1>
-        <img class="Header-brand--image" src="~/assets/img/chart.png" alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order" />
+        <img class="Header-brand--image" src="~/static/img/chart.png" alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order" />
     </header>
 </template>
 
@@ -22,7 +22,7 @@
         border-bottom: 2px color($grey, 200) solid;
         padding: 5px;
         text-align: center;
-        background: url('~/assets/img/github-chart.png') center center repeat;
+        background: url('~/static/img/github-chart.png') center center repeat;
     }
 
     [class^="Header-brand--"] {
