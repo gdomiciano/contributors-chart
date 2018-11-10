@@ -2,7 +2,8 @@ import { Bar, mixins } from 'vue-chartjs';
 
 const { reactiveProp } = mixins;
 
-export default Bar.extend({
+export default {
+    extends: Bar,
     mixins: [reactiveProp],
     props: {
         options: {
@@ -42,4 +43,4 @@ export default Bar.extend({
             plugins: [],
         };
     },
-});
+};

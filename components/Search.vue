@@ -2,7 +2,8 @@
     <div class="Search-typeahead">
         <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
         <form class="Search-typeahead--form" v-on:submit.prevent>
-            <input class="Search-typeahead--field"  type="search" name="user" id="user" placeholder="GitHub username" v-model.lazy="user" v-delay="delay" @change="getRepos" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
+            {{ user }}
+            <input class="Search-typeahead--field"  ref="search" type="search" name="user" id="user" placeholder="GitHub username" v-model.lazy="user"  @input="applyDelay" @keyup.down="focusDown" @focus="getRepos" autocomplete="off" />
         </form>
 
         <ul class="Search-typeahead--list" v-if="repos && user">
@@ -24,6 +25,7 @@
             return {
                 user: '',
                 delay: 500,
+                timeoutI: null
             };
         },
 
@@ -34,21 +36,19 @@
         },
 
         methods: {
-            // run the delay for the directive
-            debounce: (fn, delay) => {
-                let timeoutID = null;
-                return () => {
-                    clearTimeout(timeoutID);
-                    const args = arguments;
-                    timeoutID = setTimeout(() => {
-                        fn.apply(this, args);
-                    }, delay);
-                };
+             applyDelay () {
+                this.user = this.$refs.search.value
+                clearTimeout(this.timeoutID);
+                this.timeoutID = setTimeout(() => {
+                    if(this.user) this.getRepos();
+                }, this.delay);
             },
 
             // get repositories from user
             async getRepos() {
+                console.log('apply get repos to', this.user);
                 if (this.user) {
+                    console.log('actual call')
                     const user = this.user.split('/');
                     await this.$store.dispatch('getRepoList', user[0]);
                 }
@@ -93,20 +93,6 @@
                 const repository = e.target.innerText;
                 this.user = repository;
                 this.$emit('showChart', repository);
-            },
-        },
-
-        directives: {
-            // this custom directive is used to wait 500ms after user's last key interaction and then it will call the github API
-            delay: (el, binding) => {
-                const app = this.a;
-                if (binding.value !== binding.oldValue) { // change debounce only if interval has changed
-                    /* eslint-disable */
-                    el.oninput = app.methods.debounce(() => {
-                        el.dispatchEvent(new Event('change'));
-                    }, parseInt(binding.value) || 500);
-                    /* eslint-enable */
-                }
             },
         },
     };
