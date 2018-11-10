@@ -1,17 +1,23 @@
 <template>
-    <header class="Header">
-        <img class="Header-brand--logo" src="~/static/icon.png" alt="logo: github octocat" />
-        <h1 class="Header-brand--title">
-            Contributor's
-        </h1>
-        <img class="Header-brand--image" src="~/static/img/chart.png" alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order" />
-    </header>
+  <header class="Header">
+    <img
+      class="Header-brand--logo"
+      src="~/static/icon.png"
+      alt="logo: github octocat">
+    <h1 class="Header-brand--title">
+      Contributor's
+    </h1>
+    <img
+      class="Header-brand--image"
+      src="~/static/img/chart.png"
+      alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order">
+  </header>
 </template>
 
 <script>
-    export default {
-        name: 'FixedHeader',
-    };
+  export default {
+    name: 'FixedHeader',
+  };
 </script>
 
 <style scoped lang="scss">

@@ -1,32 +1,32 @@
 <template>
-    <div class="Chart">
-        <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
-        <bar-chart :chart-data="chartInfo"></bar-chart>
-    </div>
+  <div class="Chart">
+    <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
+    <bar-chart :chart-data="chartInfo" />
+  </div>
 </template>
 
 <script>
-    import BarChart from '@/components/BarChart';
-    import { mapGetters } from 'vuex'
+import BarChart from '@/components/BarChart';
+import { mapGetters } from 'vuex'
 
-    export default {
-        name: 'Chart',
+export default {
+  name: 'Chart',
 
-        components: {
-            BarChart,
-        },
+  components: {
+    BarChart,
+  },
 
-        computed: {
-            ...mapGetters ([
-                'chartInfo',
-                'repositoryName'
-            ]),
-        },
+  computed: {
+    ...mapGetters ([
+      'chartInfo',
+      'repositoryName'
+    ]),
+  },
 
-        beforeMount() {
-            this.visibleArea = window.innerHeight / 2;
-        },
-    };
+  beforeMount() {
+    this.visibleArea = window.innerHeight / 2;
+  },
+};
 
 </script>
 

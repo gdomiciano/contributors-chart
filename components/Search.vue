@@ -1,34 +1,42 @@
 <template>
-    <div class="Search-typeahead">
-        <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
-        <form
-            class="Search-typeahead--form"
-            v-on:submit.prevent>
-            <input
-            class="Search-typeahead--field"
-            ref="search" type="search"
-            name="user"
-            id="user"
-            placeholder="GitHub username"
-            v-model.lazy="user"
-            @input="applyDelay"
-            @keyup.down="focusDown"
-            @focus="getRepos"
-            autocomplete="off" />
-        </form>
+  <div class="Search-typeahead">
+    <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
+    <form
+      class="Search-typeahead--form"
+      @submit.prevent>
+      <input
+        id="user"
+        ref="search"
+        v-model.lazy="user"
+        class="Search-typeahead--field"
+        type="search"
+        name="user"
+        placeholder="GitHub username"
+        autocomplete="off"
+        @input="applyDelay"
+        @keyup.down="focusDown"
+        @focus="getRepos">
+    </form>
 
-        <ul class="Search-typeahead--list" v-if="repoList && user">
-            <li
-                class="Search-typeahead--item"
-                v-for="repo in repoList"
-                :key="repo.id"
-                @click="selectItem"
-                @keyup.down="focusDown"
-                @keyup.up="focusUp">
-                <a href="#" class="Search-typeahead--link" @keyup.enter="selectItem"> {{ repo.full_name }} </a>
-            </li>
-        </ul>
-    </div>
+    <ul
+      v-if="repoList && user"
+      class="Search-typeahead--list">
+      <li
+        v-for="repo in repoList"
+        :key="repo.id"
+        class="Search-typeahead--item"
+        @click="selectItem"
+        @keyup.down="focusDown"
+        @keyup.up="focusUp">
+        <a
+          href="#"
+          class="Search-typeahead--link"
+          @keyup.enter="selectItem">
+          {{ repo.full_name }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

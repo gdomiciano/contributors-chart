@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <fixed-header/>
-        <nuxt/>
-    </div>
+  <div>
+    <fixed-header/>
+    <nuxt/>
+  </div>
 </template>
 
 <script>

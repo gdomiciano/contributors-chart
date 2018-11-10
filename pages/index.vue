@@ -1,11 +1,13 @@
 <template>
-    <section class="container">
-        <div>
-            <search @showChart="getInfo" />
-            <error v-if="message" :message="message" />
-            <chart v-if="chartInfo" />
-        </div>
-    </section>
+  <section class="container">
+    <div>
+      <search @showChart="getInfo" />
+      <error
+        v-if="message"
+        :message="message" />
+      <chart v-if="chartInfo" />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -15,17 +17,16 @@
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
+        components: {
+            Search,
+            Error,
+            Chart,
+        },
 
         data() {
             return {
                 repository: null,
             };
-        },
-
-        components: {
-            Search,
-            Error,
-            Chart,
         },
 
         computed: {
