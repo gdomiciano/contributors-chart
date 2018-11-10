@@ -54,7 +54,12 @@ export const actions = {
                 commit('SET_ERROR', `${user} has no repositories.`);
             }
         } catch (error) {
-            commit('SET_ERROR', 'User not found.');
+            if (error.response.status === 403) {
+                commit('SET_ERROR', 'API rate limit exceeded, try again in one hour');
+            } else {
+                commit('SET_ERROR', 'User not found.');
+
+            }
         }
     },
 
