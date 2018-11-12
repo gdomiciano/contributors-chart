@@ -13,7 +13,8 @@
     "precommit": "npm run lint",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
     "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
-    "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate"
+    "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
+    "cypress:open": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -28,6 +29,7 @@
     "babel-eslint": "^10.0.1",
     "chart.js": "^2.7.3",
     "cross-env": "^5.2.0",
+    "cypress": "^3.1.1",
     "eslint": "^3.19.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-html": "^4.0.6",
