@@ -23,11 +23,13 @@
 
     <ul
       v-if="repoList && user"
-      class="Search-typeahead--list">
+      class="Search-typeahead--list"
+      date-cy="repo-suggestions">
       <li
         v-for="repo in repoList"
         :key="repo.id"
         class="Search-typeahead--item"
+        data-cy="repo-item"
         @click="selectItem"
         @keyup.down="focusDown"
         @keyup.up="focusUp">
