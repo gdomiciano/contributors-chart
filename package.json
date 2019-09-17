@@ -17,27 +17,28 @@
     "cypress:open": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/proxy": "^1.3.1",
+    "@nuxtjs/axios": "^5.6.0",
+    "@nuxtjs/proxy": "^1.3.3",
     "@nuxtjs/pwa": "^2.6.0",
-    "acorn": "^6.0.4",
-    "acorn-jsx": "^5.0.0",
-    "nuxt": "latest",
-    "vue-chartjs": "^3.4.0"
+    "acorn": "^6.3.0",
+    "acorn-jsx": "^5.0.2",
+    "npm": "^6.11.3",
+    "nuxt": "^2.9.2",
+    "vue-chartjs": "^3.4.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "chart.js": "^2.7.3",
-    "cross-env": "^5.2.0",
-    "cypress": "^3.1.1",
+    "babel-eslint": "^10.0.3",
+    "chart.js": "^2.8.0",
+    "cross-env": "^5.2.1",
+    "cypress": "^3.4.1",
     "eslint": "^3.19.0",
-    "eslint-loader": "^2.1.1",
+    "eslint-loader": "^2.2.1",
     "eslint-plugin-html": "^4.0.6",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-vue": "^4.7.1",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.12.0",
     "push-dir": "^0.4.1",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.3.1"
   }
 }
