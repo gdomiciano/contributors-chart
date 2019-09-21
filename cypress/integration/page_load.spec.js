@@ -1,6 +1,6 @@
 describe('Page Load', () => {
   before(() => {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:8000')
   })
 
   it('should load header content', () => {

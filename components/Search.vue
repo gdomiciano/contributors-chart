@@ -24,7 +24,7 @@
     <ul
       v-if="repoList && user"
       class="Search-typeahead--list"
-      date-cy="repo-suggestions">
+      data-cy="repo-suggestions">
       <li
         v-for="repo in repoList"
         :key="repo.id"

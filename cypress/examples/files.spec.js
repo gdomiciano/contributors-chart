@@ -11,7 +11,7 @@ context('Files', () => {
     // use a fixture file's content.
 
     cy.server()
-    cy.fixture('example.json').as('comment')
+    cy.fixture('one-contributor.json').as('comment')
     cy.route('GET', 'comments/*', '@comment').as('getComment')
 
     // we have code that gets a comment when
@@ -23,7 +23,7 @@ context('Files', () => {
       .and('include', 'Using fixtures to represent data')
 
     // you can also just write the fixture in the route
-    cy.route('GET', 'comments/*', 'fixture:example.json').as('getComment')
+    cy.route('GET', 'comments/*', 'fixture:one-contributor.json').as('getComment')
 
     // we have code that gets a comment when
     // the button is clicked in scripts.js
