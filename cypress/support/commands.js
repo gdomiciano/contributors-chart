@@ -9,8 +9,9 @@ Cypress.Commands.add('makeRequest', (method, url, alias, status, body) => {
   cy.wait(`@${alias}`).its('status').should('eq', status)
 })
 
-Cypress.Commands.add('makeStubbedRequest', () => {
-
+Cypress.Commands.add('makeStubbedRequest', (url, response, alias) => {
+  cy.server()
+  cy.route(url, response).as(alias)
 })
 
 Cypress.Commands.add('getStore', function () {
@@ -22,3 +23,7 @@ Cypress.Commands.add('getStore', function () {
 Cypress.Commands.add('getPropfromStore', (property) => {
   cy.getStore().then((store) => store.getters[property])
 })
+
+// Cypress.Commands.add('setChartProps', (fixture) => {
+//   cy.getStore().then((store) => store.commit('SET_CHART_INFO', fixture)
+// })

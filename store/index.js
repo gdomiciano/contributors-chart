@@ -29,7 +29,13 @@ export const mutations = {
       labels: [],
       datasets: [{
         label: 'User Contributions',
-        backgroundColor: '#AF3C34',
+        backgroundColor: () => {
+          const red = Math.floor(Math.random() * Math.floor(255))
+          const blue = Math.floor(Math.random() * Math.floor(255))
+          const green = Math.floor(Math.random() * Math.floor(255))
+          const alpha = Math.random() * (1 - 0.5) + 0.5
+          return `rgba(${red},${blue},${green},${alpha})`
+        },
         data: [],
         barPercentage: 1.0,
       }],
@@ -51,9 +57,9 @@ export const mutations = {
 
 export const actions = {
   async getRepoList({ commit }, user) {
-    this.$axios.setHeader('Accept', 'application/vnd.github.v3+json');
     try {
       const data = await this.$axios.$get(`https://api.github.com/users/${user}/repos`);
+      console.log('get repo list', data)
       if (data.length > 0) {
         commit('SET_REPO_LIST', data);
       } else {
@@ -69,11 +75,11 @@ export const actions = {
   },
 
   async getChartInfo({ commit }, repo) {
-    this.$axios.setHeader('Accept', 'application/vnd.github.v3+json');
     try {
       const data = await this.$axios.$get(`https://api.github.com/repos/${repo}/contributors`);
       commit('SET_REPO_NAME', repo);
       commit('SET_CHART_INFO', data);
+      console.log('get contributors', data  )
     } catch(error) {
       console.error('chart', error);
     }

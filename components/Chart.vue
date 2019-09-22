@@ -1,6 +1,11 @@
 <template>
   <div class="Chart">
-    <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
+    <h2
+      class="Chart-title"
+      data-cy="chart-title"
+    >
+      {{ repositoryName }}'s chart:
+    </h2>
     <div class="Chart-container">
       <bar-chart
         :chart-data="chartInfo"

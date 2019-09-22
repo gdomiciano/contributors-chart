@@ -1,57 +1,44 @@
-const oneContributor = require('../fixtures/one-contributor.json')
-const twoContributors = require('../fixtures/two-contributors')
-
 describe('Page Load', () => {
   before(() => {
     cy.visit('http://localhost:3000')
   })
+  const user = 'm'
+  const repo = 'wp-calypso'
 
-  it.skip('assert real number of contributors', () => {
-    cy.get('[data-cy=search-field')
-    .should('be.visible').type('m')
+  it('assert real number of contributors', () => {
+    cy.get('[data-cy=search-field').type(user)
+    cy.makeRequest('GET', `/users/${user}/repos`, 'repos', 200)
 
     cy.get('[data-cy=repo-suggestions]').within(($names) => {
       cy.get('[data-cy=repo-item]')
-      .contains(' m/wp-calypso').click()
+      .contains(`${user}/${repo}`).click()
     })
+    cy.makeRequest('GET', `/repos/${user}/${repo}/contributors`, 'contributors', 200)
 
-    cy.get('h2').should('be.visible')
+    cy.getPropfromStore('chartInfo').should('be.an', 'Array').and('not.be.empty')
+
+    cy.get('[data-cy=chart-title]').should('be.visible').and('contain', `${repo}`)
     cy.screenshot()
 
-    cy.request('https://api.github.com/repos/m/wp-calypso/contributors').as('contributors')
-    cy.get('@contributors').should(($response) => {
-      Cypress.log($response)
-      expect($response.body).to.have.length(30)
-      expect($response).to.have.property('headers')
-    })
+    // cy.get('@contributors').should(($response) => {
+    //   Cypress.log($response)
+    //   expect($response.body).to.have.length(30)
+    //   expect($response).to.have.property('headers')
+    // })
   })
 
   it('assert number of contributors is 0', () => {
-    cy.server().route({
-      method: 'GET',
-      url: 'https://api.github.com/repos/m/wp-calypso/contributors',
-      response:  twoContributors
-    })
+    cy.get('[data-cy=search-field').type(user)
 
-    cy.get('[data-cy=search-field')
-    .should('be.visible').type('m')
+    cy.makeStubbedRequest(`https://api.github.com/repos/${user}/${repo}/contributors`, 'fx:get-contributors-response.json', 'contributors')
 
-    cy.get('[data-cy=repo-suggestions]').within(($names) => {
+    cy.get('[data-cy=repo-suggestions]').within(() => {
       cy.get('[data-cy=repo-item]')
-      .contains(' m/wp-calypso').click()
+        .contains(`${user}/${repo}`).click()
     })
 
-    cy.get('h2').should('be.visible')
-
-    cy.wait(300)
-
-    /// ToDo check how assert 2 contributors in response
-    cy.request('http://localhost:3000/__cypress/xhrs/https://api.github.com/repos/m/wp-calypso/contributors').as('contributors')
-    cy.get('@contributors').should(($response) => {
-      Cypress.log($response)
-      expect($response.body).to.have.length(1)
-      expect($response).to.have.property('headers')
+    cy.wait('@contributors').its('responseBody').should(($response) => {
+      expect($response).to.have.length(30)
     })
   })
-
 })
