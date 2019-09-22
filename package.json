@@ -9,7 +9,7 @@
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
         "precommit": "npm run lint",
         "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
         "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
@@ -19,7 +19,7 @@
         "dcr:run": "FORCE_COLOR=1 docker run contributors:latest npm run ci",
         "start-server": "npm run dev",
         "test": "FORCE_COLOR=1 cypress run --browser chrome",
-        "ci": "start-server-and-test start-server http://localhost:8000 test"
+        "ci": "start-server-and-test start-server http://localhost:3000 test"
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.6.0",

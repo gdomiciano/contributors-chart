@@ -9,7 +9,6 @@ module.exports = {
       es6: true,
       browser: true,
     },
-    // required to lint *.vue files
     plugins: [
       'vue'
     ],
@@ -17,7 +16,6 @@ module.exports = {
       'eslint:recommended',
       'plugin:vue/recommended'
     ],
-    // add your custom rules here
     rules: {
       // allow debugger during development
       'no-console': 0,

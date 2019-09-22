@@ -5,6 +5,9 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
 } : {}
 
 export default {
+    env: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    },
     ...routerBase,
     build: {
         extend(config, ctx) {

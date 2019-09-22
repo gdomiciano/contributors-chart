@@ -3,7 +3,7 @@ const twoContributors = require('../fixtures/two-contributors')
 
 describe('Page Load', () => {
     before(() => {
-        cy.visit('http://localhost:8000')
+        cy.visit('http://localhost:3000')
     })
 
     it.skip('assert real number of contributors', () => {
@@ -26,7 +26,6 @@ describe('Page Load', () => {
         })
     })
 
-
     it('assert number of contributors is 0', () => {
         cy.server().route({
             method: 'GET',
@@ -47,7 +46,7 @@ describe('Page Load', () => {
         cy.wait(300)
 
         /// ToDo check how assert 2 contributors in response
-        cy.request('http://localhost:8000/__cypress/xhrs/https://api.github.com/repos/m/wp-calypso/contributors').as('contributors')
+        cy.request('http://localhost:3000/__cypress/xhrs/https://api.github.com/repos/m/wp-calypso/contributors').as('contributors')
         cy.get('@contributors').should(($response) => {
             Cypress.log($response)
             expect($response.body).to.have.length(1)

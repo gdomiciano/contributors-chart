@@ -1,6 +1,7 @@
+console.log(process.env)
 describe('Page Load', () => {
   before(() => {
-    cy.visit('http://localhost:8000')
+    cy.visit('http://localhost:3000')
   })
 
   it('should load header content', () => {
