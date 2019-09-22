@@ -3,7 +3,7 @@
     <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
     <div class="Chart-container">
       <bar-chart
-        :chart-data="corlorfulChart"
+        :chart-data="chartInfo"
         :options="options"
       />
     </div>

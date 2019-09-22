@@ -1,13 +1,11 @@
-import VIEWPORTS from '../fixtures/viewports'
-
-const orientation = ['portrait', 'landscape']
+import {ALL_VIEWPORTS} from '../fixtures/viewports'
 
 describe('Page Load', () => {
   before(() => {
     cy.visit('http://localhost:3000')
   })
 
-  VIEWPORTS.forEach((viewPort) => {
+  ALL_VIEWPORTS.forEach((viewPort) => {
     it(`${viewPort} should load header content`, () => {
       cy.viewport(viewPort)
       cy.get('[data-cy=header]')

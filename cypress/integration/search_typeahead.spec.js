@@ -3,37 +3,15 @@ describe('Search-TypeAhead', () => {
     cy.visit('http://localhost:3000')
   })
 
-  let store
-
-  const getVuex = () => cy.window().its('$nuxt.$store')
-
-  beforeEach(() => {
-    getVuex().then(s => {
-      store = s
-    })
-  })
-
-  const getFromStore = property => cy.then(_ => store.getters[property])
-
   it('should search & return repos from store', () => {
     const user = 'nuxt-community'
     cy.get('[data-cy=search-field]')
       .type(user)
 
-    cy.server()
-    cy
-      .route({
-        method: 'GET',
-        url: `/users/${user}/repos`
-      })
-      .as('repos')
-    cy.wait('@repos').its('status').should('eq', 200)
+    cy.makeRequest('GET', `/users/${user}/repos`, 'repos', 200)
 
-    const repositories = getFromStore('repoList')
-    repositories.should('be.an', 'Array').and('not.be.empty')
+    cy.getPropfromStore('repoList').should('be.an', 'Array').and('not.be.empty')
 
-    cy.get('[data-cy=repo-item]')
-      .should('be.greaterThan', 0)
+    cy.get('[data-cy=repo-item]').its('length').should('to.be.greaterThan', 0)
   })
-
 })
