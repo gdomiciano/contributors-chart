@@ -7,39 +7,17 @@ export default {
   mixins: [reactiveProp],
   props: {
     options: {
-    type: Object,
+      type: Object,
+      default: null,
+    },
+    chartData: {
+      type: Object,
+      default: null,
     },
   },
 
   mounted () {
     // this.chartData is created in the mixin
     this.renderChart(this.chartData, this.options);
-  },
-
-  // reset default options so it is possible to resize the chart
-  data () {
-    return {
-      defaultOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            },
-            stacked: true,
-            gridLines: {
-              display: true,
-            },
-          }],
-          xAxes: [{
-            stacked: true,
-            gridLines: {
-              display: false,
-            },
-          }],
-        },
-      },
-    };
   },
 };
