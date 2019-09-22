@@ -4,11 +4,7 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
     }
 } : {}
 
-module.exports = {
-    server: {
-        port: 8000,
-        host: "0.0.0.0",
-    },
+export default {
     ...routerBase,
     build: {
         extend(config, ctx) {
