@@ -1,6 +1,8 @@
 <template>
   <div class="Search-typeahead">
-    <p class="Search-typeahead--intro">Type any Github Username and choose a repository to see the contribution chart</p>
+    <p
+      class="Search-typeahead--intro"
+      data-cy="instruction">Type any Github Username and choose a repository to see the contribution chart</p>
     <form
       class="Search-typeahead--form"
       @submit.prevent>
@@ -13,6 +15,7 @@
         name="user"
         placeholder="GitHub username"
         autocomplete="off"
+        data-cy="search-field"
         @input="applyDelay"
         @keyup.down="focusDown"
         @focus="getRepos">
@@ -20,11 +23,13 @@
 
     <ul
       v-if="repoList && user"
-      class="Search-typeahead--list">
+      class="Search-typeahead--list"
+      data-cy="repo-suggestions">
       <li
         v-for="repo in repoList"
         :key="repo.id"
         class="Search-typeahead--item"
+        data-cy="repo-item"
         @click="selectItem"
         @keyup.down="focusDown"
         @keyup.up="focusUp">

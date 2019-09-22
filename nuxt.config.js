@@ -4,7 +4,7 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
     }
 } : {}
 
-module.exports = {
+export default {
     ...routerBase,
     build: {
         extend(config, ctx) {
@@ -28,10 +28,10 @@ module.exports = {
         title: 'Contriburtor\'s Chart',
     },
 
-    loading: { color: '#F3AF92' },
+    loading: {color: '#F3AF92'},
 
     manifest: {
-        name: 'Contributor\'s Chart' ,
+        name: 'Contributor\'s Chart',
         description: 'Check the contributions for each GitHub repo',
         theme_color: '#272727',
     },

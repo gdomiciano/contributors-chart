@@ -1,16 +1,22 @@
 <template>
-  <header class="Header">
+  <header
+    class="Header"
+    data-cy="header">
     <img
       class="Header-brand--logo"
-      src="~/static/icon.png"
-      alt="logo: github octocat">
-    <h1 class="Header-brand--title">
+      src="~static/icon.png"
+      alt="logo: github octocat"
+      data-cy="logo">
+    <h1
+      class="Header-brand--title"
+      data-cy="title">
       Contributor's
     </h1>
     <img
       class="Header-brand--image"
-      src="~/static/img/chart.png"
-      alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order">
+      src="~static/img/chart.png"
+      alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order"
+      data-cy="image">
   </header>
 </template>
 
@@ -28,7 +34,7 @@
         border-bottom: 2px color($grey, 200) solid;
         padding: 5px;
         text-align: center;
-        background: url('~/static/img/github-chart.png') center center repeat;
+        background: url('~static/img/github-chart.png') center center repeat;
     }
 
     [class^="Header-brand--"] {

@@ -32,14 +32,14 @@ export default {
 
 <style scoped>
 
-    .Chart {
-        width: 95%;
-        max-height: 50%;
-        margin: 0 auto 40px;
-    }
+  .Chart {
+    width: 95%;
+    max-height: 50%;
+    margin: 0 auto 40px;
+  }
 
-    .Chart-title{
-        font-size: 28px;
-        text-align: center;
-    }
+  .Chart-title{
+    font-size: 28px;
+    text-align: center;
+  }
 </style>
