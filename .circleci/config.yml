@@ -1,20 +1,19 @@
-version: 2.1
+version: 2
 jobs:
   build:
-    docker:
-      - image: node:10-browsers
+    machine: true
     steps:
-      - checkout
-      - run: npm run dcr:build
+     - checkout
+     - run: npm run dcr:build
+
   test:
-    docker:
-      - image: node:10-browsers
+    machine: true
     steps:
       - checkout
       - run: npm run dcr:run
 
 workflows:
-  version: 2.1
+  version: 2
   build_and_test:
     jobs:
       - build
