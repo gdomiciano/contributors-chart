@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  docker:
     machine: true
     steps:
      - checkout
@@ -12,3 +12,9 @@ jobs:
     steps:
       - checkout
       - run: npm run ci
+workflows:
+  version: 2
+  example_of_running:
+    jobs:
+      - docker
+      - testCi
