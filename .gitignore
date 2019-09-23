@@ -16,8 +16,14 @@ dist
 
 # VSCode
 .vscode
+.editorconfig
 
 # Generated files
 static/manifest*.json
 static/sw.js
 static/workbox-sw*.js
+
+#Cypress
+cypress/screenshots/*
+cypress/videos/*
+cypress/.DS_Store

@@ -1,7 +1,17 @@
 <template>
   <div class="Chart">
-    <h2 class="Chart-title"> {{ repositoryName }}'s chart:</h2>
-    <bar-chart :chart-data="chartInfo" />
+    <h2
+      class="Chart-title"
+      data-cy="chart-title"
+    >
+      {{ repositoryName }}'s chart:
+    </h2>
+    <div class="Chart-container">
+      <bar-chart
+        :chart-data="chartInfo"
+        :options="options"
+      />
+    </div>
   </div>
 </template>
 
@@ -16,30 +26,63 @@ export default {
     BarChart,
   },
 
+  data () {
+    return {
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+            },
+            stacked: true,
+            gridLines: {
+              display: true,
+            },
+          }],
+          xAxes: [{
+            stacked: true,
+            gridLines: {
+              display: false,
+            },
+          }],
+        },
+      }
+    }
+  },
+
   computed: {
     ...mapGetters ([
       'chartInfo',
       'repositoryName'
-    ]),
+    ])
   },
 
-  beforeMount() {
-    this.visibleArea = window.innerHeight / 2;
-  },
+  updated () {
+    this.$el.querySelector('.Chart-container').scrollIntoView();
+  }
 };
 
 </script>
 
 <style scoped>
 
-    .Chart {
-        width: 95%;
-        max-height: 50%;
-        margin: 0 auto 40px;
-    }
+  .Chart {
+    width: 95%;
+    max-height: 50%;
+    margin: 0 auto 40px;
+  }
 
-    .Chart-title{
-        font-size: 28px;
-        text-align: center;
-    }
+  .Chart-title{
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .Chart-container {
+    position: relative;
+    height: calc(100vh - 400px);
+    width: 80vw;
+    margin: 0 auto;
+  }
 </style>
