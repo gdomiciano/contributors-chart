@@ -18,10 +18,8 @@ workflows:
   build_and_test:
     jobs:
       - build
-        filters:
-          branches:
+         branches:
             only: develop
       - test
-        filters:
           branches:
             only: develop
