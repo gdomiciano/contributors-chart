@@ -6,3 +6,9 @@ jobs:
      - checkout
      - run: npm run dcr:build
      - run: npm run dcr:run
+  testCi:
+    docker:
+      - image: cypress/browsers:node10.16.0-chrome76
+    steps:
+      - checkout
+      - run: npm run ci
