@@ -1,6 +1,6 @@
 describe('Search-TypeAhead', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:57403')
+    cy.visit('http://localhost:3000')
   })
 
   const user = 'm'
