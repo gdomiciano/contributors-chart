@@ -11,6 +11,7 @@ jobs:
       - image: cypress/browsers:node10.16.0-chrome76
     steps:
       - checkout
+      - run: npm install
       - run: npm run ci
 workflows:
   version: 2
