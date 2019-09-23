@@ -1,19 +1,26 @@
 version: 2.1
 jobs:
   build:
+    branches:
+      only:
+        - develop
     docker:
       - image: node:10-browsers
     steps:
       - checkout
       - run: npm run dcr:build
   test:
+    branches:
+      only:
+        - develop
     docker:
       - image: node:10-browsers
     steps:
       - checkout
       - run: npm run dcr:run
+
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build
