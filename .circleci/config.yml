@@ -14,8 +14,6 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run ci
-      - store_test_results:
-         path: /cypress/screenshots
 
 workflows:
   version: 2
