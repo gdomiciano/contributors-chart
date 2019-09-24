@@ -16,7 +16,7 @@ describe('Search-TypeAhead', () => {
     cy.getPropfromStore('repoList').should('be.an', 'Array').and('not.be.empty')
 
     cy.get('[data-cy=repo-item]').its('length')
-      .should('to.be.greaterThan', 0)
+      .should('to.be.eql', 29)
   })
 
   it('assert number of contributors is 0', () => {
@@ -30,7 +30,7 @@ describe('Search-TypeAhead', () => {
     })
 
     cy.wait('@contributors').its('responseBody').should(($response) => {
-      expect($response).to.have.length(2)
+      expect($response).to.have.length(7)
     })
   })
 })
