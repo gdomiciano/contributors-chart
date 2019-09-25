@@ -1,6 +1,6 @@
 {
     "name": "contributors-chart",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Responsive application, that user can search for a repository and see contributions per user in a chart.",
     "author": "Geisy Domiciano <geisydomiciano@gmail.com>",
     "private": true,
@@ -39,7 +39,7 @@
         "cypress": "^3.4.1",
         "cypress-blink-test": "^0.1.5",
         "cypress-visual-regression": "^1.0.4",
-        "eslint": "^3.19.0",
+        "eslint": "^4.18.2",
         "eslint-loader": "^2.2.1",
         "eslint-plugin-html": "^4.0.6",
         "eslint-plugin-import": "^2.18.2",
