@@ -1,27 +1,23 @@
-version: 2.1
+version: 2
 jobs:
-  build:
+  docker:
+    machine: true
+    steps:
+     - checkout
+     - run: npm run dcr:build
+     - run: npm run dcr:run
+
+  testCi:
     docker:
-      - image: node:10-browsers
+      - image: cypress/browsers:node10.16.0-chrome76
     steps:
       - checkout
-      - run: npm run dcr:build
-  test:
-    docker:
-      - image: node:10-browsers
-    steps:
-      - checkout
-      - run: npm run dcr:run
+      - run: npm install
+      - run: npm run ci
 
 workflows:
-  version: 2.1
-  build_and_test:
+  version: 2
+  example_of_running:
     jobs:
-      - build
-        filters:
-          branches:
-            only: develop
-      - test
-        filters:
-          branches:
-            only: develop
+      - docker
+      - testCi
