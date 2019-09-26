@@ -1,10 +1,8 @@
 describe('Search-TypeAhead', () => {
+
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   })
-
-  const user = 'm'
-  const repo = 'wp-calypso'
 
   it('should search & return repos from store', () => {
     const user = 'nuxt-community'
@@ -19,7 +17,10 @@ describe('Search-TypeAhead', () => {
       .should('to.be.greaterThan', 0)
   })
 
-  it('assert number of contributors is 0', () => {
+  it('assert number of contributors is 2', () => {
+    const user = 'm'
+    const repo = 'wp-calypso'
+
     cy.get('[data-cy=search-field').type(user)
 
     cy.makeStubbedRequest(`https://api.github.com/repos/${user}/${repo}/contributors`, 'fx:two-contributors.json', 'contributors')

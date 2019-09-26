@@ -1,6 +1,7 @@
 import {ALL_VIEWPORTS} from '../fixtures/viewports'
 
 describe('Page Load', () => {
+
   before(() => {
     cy.visit('http://localhost:3000')
   })

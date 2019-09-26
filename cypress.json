@@ -1,4 +1,6 @@
 {
     "trashAssetsBeforeRuns": true,
-    "video": false
+    "video": false,
+    "viewportHeight": 760,
+    "viewportWidth": 1024
 }
