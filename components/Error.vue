@@ -1,7 +1,7 @@
 <template>
   <div class="Error">
     <p class="Error-msg">
-      {{ message }}
+      {{ $t(errorMsg) }}
     </p>
   </div>
 </template>
@@ -16,6 +16,12 @@ export default {
       required: true,
     },
   },
+
+  computed: {
+    errorMsg () {
+      return 'error.'+this.message
+    }
+  }
 };
 </script>
 

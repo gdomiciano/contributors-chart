@@ -8,5 +8,5 @@ export default {
     'empty': 'Det finns inga projekt till den här användaren',
     'api rate': 'Begäringsgränsen har nåtts, försök igen om en timme'
   },
-  'languages': 'språk'
+  'languages': 'Språk'
 }
