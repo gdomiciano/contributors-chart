@@ -13,7 +13,7 @@
       class="Header-brand--title"
       data-cy="title"
     >
-      Contributor's
+      {{ $t('contributors') }}
     </h1>
     <img
       class="Header-brand--image"

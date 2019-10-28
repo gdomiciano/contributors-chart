@@ -4,7 +4,7 @@
       class="Search-typeahead--intro"
       data-cy="instruction"
     >
-      Type any Github Username and choose a repository to see the contribution chart
+      {{ $t('type username') }}
     </p>
     <form
       class="Search-typeahead--form"

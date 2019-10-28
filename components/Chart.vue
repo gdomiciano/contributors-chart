@@ -1,12 +1,21 @@
 <template>
   <div class="Chart">
     <h2
+      v-if="!!repositoryName"
       class="Chart-title"
       data-cy="chart-title"
     >
-      {{ repositoryName }}'s chart:
+      {{ $t('chart title', { repository: repositoryName }) }}
     </h2>
     <div class="Chart-container">
+      <p
+        v-if="!!chartInfo"
+        class="Chart-description"
+      >
+        {{ $tc('total contributors',chartInfo.labels.length) }}
+
+        {{ chartInfo.length }}
+      </p>
       <bar-chart
         :chart-data="chartInfo"
         :options="options"
@@ -77,6 +86,7 @@ export default {
   .Chart-title{
     font-size: 28px;
     text-align: center;
+    margin-bottom: 15px;
   }
 
   .Chart-container {
@@ -84,5 +94,6 @@ export default {
     height: calc(100vh - 400px);
     width: 80vw;
     margin: 0 auto;
+    text-align: center;
   }
 </style>
