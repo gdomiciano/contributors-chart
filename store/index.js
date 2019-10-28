@@ -63,13 +63,13 @@ export const actions = {
       if (data.length > 0) {
         commit('SET_REPO_LIST', data);
       } else {
-        commit('SET_ERROR', `${user} has no repositories.`);
+        commit('SET_ERROR', 'empty');
       }
     } catch (error) {
       if (error.response.status === 403) {
-        commit('SET_ERROR', 'API rate limit exceeded, try again in one hour');
+        commit('SET_ERROR', 'api rate');
       } else {
-        commit('SET_ERROR', 'User not found.');
+        commit('SET_ERROR', 'not found');
       }
     }
   },

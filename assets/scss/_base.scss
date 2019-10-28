@@ -22,6 +22,10 @@ a {
     text-decoration: none;
     color: color($grey, 800);
     outline: none;
+    &:hover,
+    &.nuxt-link-exact-active {
+        color: color($theme-red, 800);
+    }
 }
 
 li {
