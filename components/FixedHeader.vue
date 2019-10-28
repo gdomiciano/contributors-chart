@@ -1,22 +1,26 @@
 <template>
   <header
     class="Header"
-    data-cy="header">
+    data-cy="header"
+  >
     <img
       class="Header-brand--logo"
       src="~static/icon.png"
       alt="logo: github octocat"
-      data-cy="logo">
+      data-cy="logo"
+    >
     <h1
       class="Header-brand--title"
-      data-cy="title">
+      data-cy="title"
+    >
       Contributor's
     </h1>
     <img
       class="Header-brand--image"
       src="~static/img/chart.png"
       alt="image of a bar chart, the bar colors are blue, red and green from left to right on increase order"
-      data-cy="image">
+      data-cy="image"
+    >
   </header>
 </template>
 

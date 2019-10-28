@@ -4,7 +4,8 @@
       <search @showChart="getInfo" />
       <error
         v-if="message"
-        :message="message" />
+        :message="message"
+      />
       <chart v-if="chartInfo" />
     </div>
   </section>

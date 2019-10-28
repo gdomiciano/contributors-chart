@@ -2,10 +2,14 @@
   <div class="Search-typeahead">
     <p
       class="Search-typeahead--intro"
-      data-cy="instruction">Type any Github Username and choose a repository to see the contribution chart</p>
+      data-cy="instruction"
+    >
+      Type any Github Username and choose a repository to see the contribution chart
+    </p>
     <form
       class="Search-typeahead--form"
-      @submit.prevent>
+      @submit.prevent
+    >
       <input
         id="user"
         ref="search"
@@ -18,13 +22,15 @@
         data-cy="search-field"
         @input="applyDelay"
         @keyup.down="focusDown"
-        @focus="getRepos">
+        @focus="getRepos"
+      >
     </form>
 
     <ul
       v-if="repoList && user"
       class="Search-typeahead--list"
-      data-cy="repo-suggestions">
+      data-cy="repo-suggestions"
+    >
       <li
         v-for="repo in repoList"
         :key="repo.id"
@@ -32,11 +38,13 @@
         data-cy="repo-item"
         @click="selectItem"
         @keyup.down="focusDown"
-        @keyup.up="focusUp">
+        @keyup.up="focusUp"
+      >
         <a
           href="#"
           class="Search-typeahead--link"
-          @keyup.enter="selectItem">
+          @keyup.enter="selectItem"
+        >
           {{ repo.full_name }}
         </a>
       </li>
