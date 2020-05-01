@@ -21,7 +21,7 @@
         "dcr:run": "FORCE_COLOR=1 docker run contributors:latest npm run ci",
         "start-server": "npm run dev",
         "test": "FORCE_COLOR=1 cypress run --browser chrome",
-        "ci": "start-server-and-test start-server http://localhost:8300 test"
+        "ci": "start-server-and-test start-server http://localhost:3000 test"
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.10.3",
