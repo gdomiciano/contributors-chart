@@ -8,7 +8,7 @@
         "dev": "nuxt",
         "dev:port": "nuxt --port 8300",
         "build": "nuxt build",
-        "analyse": "nuxt build --analyse",
+        "analyze": "nuxt build --analyze",
         "start": "nuxt start",
         "generate": "nuxt generate",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",

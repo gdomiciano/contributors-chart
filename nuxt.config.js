@@ -24,7 +24,7 @@ export default {
         });
       }
     },
-    analyze: true,
+    analyze: false,
     extractCSS: true,
   },
 
