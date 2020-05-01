@@ -2,7 +2,8 @@
   <div class="Search-typeahead">
     <label
       class="Search-typeahead--intro"
-      data-cy="instruction">Type any Github Username and choose a repository to see the contribution chart</label>
+      data-cy="instruction"
+      for="user">Type any Github Username and choose a repository to see the contribution chart</label>
     <form
       class="Search-typeahead--form"
       @submit.prevent>

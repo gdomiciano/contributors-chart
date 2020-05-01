@@ -1,6 +1,7 @@
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    base: '/contributors-chart/'
+    base: '/contributors-chart/',
+    prefetchLinks: true
   }
 } : {}
 
@@ -23,7 +24,7 @@ export default {
         });
       }
     },
-    analyze: false,
+    analyze: true,
     extractCSS: true,
   },
 
