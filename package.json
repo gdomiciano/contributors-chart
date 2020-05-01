@@ -18,9 +18,9 @@
         "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
         "cypress:open": "./node_modules/.bin/cypress open",
         "dcr:build": "docker build -t contributors .",
-        "dcr:run": "docker run contributors:latest npm run ci",
+        "dcr:run": "FORCE_COLOR=1 docker run contributors:latest npm run ci",
         "start-server": "npm run dev",
-        "test": "cypress run --browser chrome",
+        "test": "FORCE_COLOR=1 cypress run --browser chrome",
         "ci": "start-server-and-test start-server http://localhost:8300 test"
     },
     "dependencies": {
