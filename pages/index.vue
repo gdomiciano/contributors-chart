@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <main class="container">
     <div>
       <search @showChart="getInfo" />
       <error
@@ -7,7 +7,7 @@
         :message="message" />
       <chart v-if="chartInfo" />
     </div>
-  </section>
+  </main>
 </template>
 
 <script>
